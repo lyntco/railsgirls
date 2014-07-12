@@ -1,13 +1,11 @@
 def roman(n)
-  thousands = { n.divmod(1000).first => "M" }
+  thousands = { n.divmod(1000).first => ["MMMMM" ,"M"] }
   hundreds = { n.divmod(1000).last.divmod(100).first => ["D","C"] }
   tens = { n.divmod(1000).last.divmod(100).last.divmod(10).first => ["L","X"] }
   ones = { n.divmod(1000).last.divmod(100).last.divmod(10).last => ["V","I"] }
   str = ""
 
-  str += thousands.values.first * thousands.keys.first
-
-  [hundreds,tens,ones].each do |magnitude|
+  [thousands,hundreds,tens,ones].each do |magnitude|
     magnitude.each do |amount,letters|
       modres = amount % 5
       str += letters[0] if amount >= 5
